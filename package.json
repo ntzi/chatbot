@@ -1,0 +1,24 @@
+{
+  "name": "ultimate_ai_assignment",
+  "version": "1.0.0",
+  "description": "Class for state management of a troubleshooting chat bot",
+  "main": "src/sum.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node src/chatbot.js",
+    "test": "mocha"
+  },
+  "author": "Nikos Tziralis",
+  "license": "MIT",
+  "dependencies": {
+    "node": "^13.12.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "faker": "^4.1.0",
+    "mocha": "^7.1.1",
+    "sinon": "^9.0.2"
+  }
+}
