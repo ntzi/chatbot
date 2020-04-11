@@ -21,14 +21,6 @@ A basic operating principle is that the chat bot starts the conversation by aski
          $ cd chatbot/
          $ npm install
 
-  - Start
-
-         $ npm start
-
-### Tests
-
-     npm test
-
 
 ## Usage
 
@@ -46,7 +38,7 @@ For a given input answer it returns the id of the next state.
 
 
 
-## Tests
+## Test
 
 ### Prerequisites
 

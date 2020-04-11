@@ -42,7 +42,7 @@ describe("Conversation", function() {
                 expect(reply).to.equal('start');
             });
         });
-        context('with 3 replies', () => {
+        context('with 3 correct replies', () => {
             it("should return the state: samsungServiceEnd", function() {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('');
@@ -51,7 +51,7 @@ describe("Conversation", function() {
                 expect(reply).to.equal('samsungServiceEnd');
             });
         });
-        context('with 4 replies', () => {
+        context('with 4 correct replies', () => {
             it("should return the state: contactSupportEnd", function() {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('');
