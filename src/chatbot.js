@@ -4,7 +4,8 @@ const fs = require('fs');
 class Conversation {
     // Class Conversation manages the state of a troubleshooting chat bot.
     // The conversation structure is loaded through a .json file (eg: throubleshooting.json).
-    //
+    // For a given input answer it returns the id of the next state.
+    // 
     // Example usage:
     // let conv = new Conversation('./troubleshooting.json');
     // conv.reply('');  // Returns start state
@@ -12,16 +13,15 @@ class Conversation {
     // conv.reply('Samsung Galaxy S10');  // Returns samsungServiceEnd state
 
 
-    constructor(json_path, test_mode=false){
-        let rawdata = fs.readFileSync(json_path);
-        this.json_file = JSON.parse(rawdata);
-        this.test_mode = test_mode
+    constructor(json_path){
+        let rawdata = fs.readFileSync(json_path)
+        this.json_file = JSON.parse(rawdata)
         this.state = ''
-        this.results = ''
     }
 
-    get_next_state(userAnswer){
-        // Find the next state.
+    reply(userAnswer){
+        // Finds and returns the next state. Eg: conv.reply('') = 'start'
+        //
         // There are 5 cases.
         // 1: Empty input string --> begin from start state
         // 2: Last state was an ending state --> begin from start state
@@ -46,68 +46,13 @@ class Conversation {
                 // If the input answer does not match any answer of the current state, the user entered
                 // a wrong answer, so the next state will be the same as the current one.
                 next_state = this.state
-                this.results = 'Wrong answer option. Please try again.\n'
             }
         }
-        return next_state
-    }
-
-    get_question_and_answers(next_state) {
-        // Find the question and the answer options to return to the users.
-
-
-        let state_data = this.json_file.find(item => item.id === next_state)
-        if (state_data == null){
-            return ''
-        } else {
-            var result = state_data.question
-            if (state_data.answerOptions){
-                // If the next state is not an ending state, therefore there are answer options to return.
-                for (let i=0; i<state_data.answerOptions.length; i++){
-                    result = result + '\n' + (i+1) + ') '+ state_data.answerOptions[i].answer
-                }
-                return result
-            } else {
-                return result
-            }
-        }
-    }
-
-    reply(userAnswer){
-        // Return the next question and its answer options of the given user answer.
-        // On Test mode returns only the next state. Eg: conv.reply('') = 'start'
-
-        this.results = ''
-        let next_state = this.get_next_state(userAnswer)
-        this.results = this.results + this.get_question_and_answers(next_state)
+        // Save the state of the conversation.
         this.state = next_state
-
-        if (this.test_mode) {
-            // Return only the next state. Eg: conv.reply('') = 'start'
-            return this.state
-        } else {
-            // Return the question and the answer options for the user.
-            return this.results
-        }
+        return this.state
     }
 }
 
+
 module.exports = Conversation;
-
-
-
-// let conv = new Conversation('./src/troubleshooting.json', test_mode=false);
-// res = conv.reply('');  // Returns start state
-// console.log(res)
-// res = conv.reply('My phone doesn\'t work');  // Returns phoneModel state
-// console.log(res)
-// res = conv.reply('My phone doesn\'t work');  // Returns phoneModel state
-// console.log(res)
-// res = conv.reply('My phone doesn\'t work');  // Returns phoneModel state
-// console.log(res)
-// res = conv.reply('Samsung Galaxy S10');  // Returns samsungServiceEnd state
-// console.log(res)
-// res = conv.reply('Samsung Galaxy S10');  // Returns samsungServiceEnd state
-// console.log(res)
-// res = conv.reply('Samsung Galaxy S10');  // Returns samsungServiceEnd state
-// console.log(res)

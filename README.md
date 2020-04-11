@@ -1,57 +1,70 @@
-# Bloom Filter
+# Chatbot
 
-Simple implementation of Bloom Filter.
+#### Simple troubleshooting chat bot.
 
+A single class implementing state management for a troubleshooting chat bot.
 
+A basic operating principle is that the chat bot starts the conversation by asking a question about the user's problem and presents pre-defined options for the user to choose from. When the user chooses one of the presented options, the chat bot asks a new question with new options to find out more about the visitors problem.
+
+## Deploy
 ### Prerequisites
+ - Node.js
 
-* Python 3
-* pyhash
+### Steps
+  - Clone master branch
 
-```
-$ pip install pyhash
-```
+         $ git clone https://github.com/ntzi/chatbot.git
 
-### Usage
+  - Install [NodeJS and npm](https://nodejs.org/en/)
+  - Install  dependencies
 
-```
->>> from bloom_filter import BloomFilter
+         $ cd chatbot/
+         $ npm install
 
->>> bloom = BloomFilter(bit_vector_size = 10)
->>> bloom.add("just_some_text")
+  - Start
 
->>> bloom.search("just_some_text")
-Maybe the element is there.
+         $ npm start
 
->>> bloom.search("new_text")
-No, the element isn't there.
-```
+### Tests
+
+     npm test
+
+
+## Usage
+
+Class Conversation manages the state of a troubleshooting chat bot.\
+The conversation structure is loaded through a .json file (eg: throubleshooting.json).\
+For a given input answer it returns the id of the next state.
+
+### Example Usage
+
+
+    let conv = new Conversation('./troubleshooting.json');
+    conv.reply('');  // Returns start state
+    conv.reply('My phone doesn\'t work');  // Returns phoneModel state
+    conv.reply('Samsung Galaxy S10');  // Returns samsungServiceEnd state
+
+
 
 ## Tests
 
 ### Prerequisites
 
-* sys
-* random
-* string
-* logging
+* mocha
+* chai
+* faker
 
 
-### Example
+### Run tests
 
-```
-$ tests/bloom_filter_test.py
-```
+    npm test
+
+
 
 ## Authors
 
-* **Nikos Tziralis** - *Initial work* - [Bloom Filter](https://github.com/ntzi/bloom_filter)
+* **Nikos Tziralis** - *Initial work* - [Chatbot](https://github.com/ntzi/chatbot)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* https://www.geeksforgeeks.org/bloom-filters-introduction-and-python-implementation/
-* https://llimllib.github.io/bloomfilter-tutorial/
