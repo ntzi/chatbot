@@ -1,26 +1,25 @@
-const chai = require("chai");
-const expect = chai.expect;
+import { expect } from 'chai';
 const faker = require("faker");
 const Conversation = require("../src/chatbot");
 
 
-describe("Conversation", function() {
+describe("Conversation", () => {
     // Test the class Conversation for different input answers.
 
     const stubValue = {
         words: faker.random.words(2),
     };
 
-    describe("reply", function() {
+    describe("reply", () => {
         context('with empty string', () => {
-            it("should return the state: start", function() {
+            it("should return the state: start", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 const reply = conv.reply('');
                 expect(reply).to.equal('start');
             });
         });
         context('with empty string not as the first answer', () => {
-            it("should return the state: start", function() {
+            it("should return the state: start", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('My phone doesn\'t work');
                 const reply = conv.reply('');
@@ -28,14 +27,14 @@ describe("Conversation", function() {
             });
         });
         context('with empty input (not string)', () => {
-            it("should return the state: 'start'", function() {
+            it("should return the state: 'start'", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 const reply = conv.reply();
                 expect(reply).to.equal('start');
             });
         });
         context('with empty input (not string) not as the first answer', () => {
-            it("should return the state: 'start'", function() {
+            it("should return the state: 'start'", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('My internet doesn\'t work');
                 const reply = conv.reply();
@@ -43,7 +42,7 @@ describe("Conversation", function() {
             });
         });
         context('with 3 correct replies', () => {
-            it("should return the state: samsungServiceEnd", function() {
+            it("should return the state: samsungServiceEnd", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('');
                 conv.reply('My phone doesn\'t work');
@@ -52,7 +51,7 @@ describe("Conversation", function() {
             });
         });
         context('with 4 correct replies', () => {
-            it("should return the state: contactSupportEnd", function() {
+            it("should return the state: contactSupportEnd", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('');
                 conv.reply('My internet doesn\'t work');
@@ -62,7 +61,7 @@ describe("Conversation", function() {
             });
         });
         context('with choosing wrong answer option', () => {
-            it("should return the state: routerReset", function() {
+            it("should return the state: routerReset", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('');
                 conv.reply('My internet doesn\'t work');
@@ -71,7 +70,7 @@ describe("Conversation", function() {
             });
         });
         context('after reaching an end state', () => {
-            it("should return the state: start", function() {
+            it("should return the state: start", () => {
                 const conv = new Conversation('./src/troubleshooting.json');
                 conv.reply('');
                 conv.reply('My internet doesn\'t work');

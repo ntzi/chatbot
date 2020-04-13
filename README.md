@@ -8,19 +8,21 @@ A basic operating principle is that the chat bot starts the conversation by aski
 
 ## Deploy
 ### Prerequisites
- - Node.js
+  - Node.js
 
 ### Steps
   - Clone master branch
 
-         $ git clone https://github.com/ntzi/chatbot.git
+        $ git clone https://github.com/ntzi/chatbot.git
 
   - Install [NodeJS and npm](https://nodejs.org/en/)
   - Install  dependencies
 
-         $ cd chatbot/
-         $ npm install
+        $ cd chatbot/
+        $ npm install
+  - Start
 
+        $ npm start
 
 ## Usage
 
@@ -31,7 +33,7 @@ For a given input answer it returns the id of the next state.
 ### Example Usage
 
 
-    let conv = new Conversation('./troubleshooting.json');
+    let conv = new Conversation('./src/troubleshooting.json');
     conv.reply('');  // Returns start state
     conv.reply('My phone doesn\'t work');  // Returns phoneModel state
     conv.reply('Samsung Galaxy S10');  // Returns samsungServiceEnd state
